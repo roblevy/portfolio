@@ -1,0 +1,74 @@
+* {
+  font-family: "Droid Sans",Helvetica,sans-serif;
+  text-align: center;
+  color: #666;
+}
+
+a {
+  color: inherit;
+  text-decorations: none;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#content {
+  display: inherit;
+}
+
+#title {
+  font-size: 5.9vw;
+  padding-bottom: 8px;
+}
+
+#subtitle {
+  max-width: 68%;
+  display: inherit;
+  font-size: 1.2vw;
+  padding-bottom: 40px;
+}
+
+.portfolio-item {
+  position: relative;
+  display: table;
+  overflow: hidden;
+}
+
+.portfolio-image {
+  position: absolute;
+  top: 0; left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 130%;
+  max-height: 130%;
+  opacity: 0.8;
+  -webkit-transition: opacity 0.2s;
+}
+
+.active .portfolio-image {
+  opacity: 0.1;
+}
+
+.portfolio-title {
+  padding-bottom: 10px;
+}
+
+.portfolio-description {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: large;
+  font-weight: bolder;
+  opacity: 0;
+  color: rgb(253, 252, 250);
+  -webkit-transition: opacity 0.2s;
+}
+
+.active .portfolio-description {
+  opacity: 1;
+}
