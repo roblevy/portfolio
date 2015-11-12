@@ -15,7 +15,9 @@ a:hover {
 }
 
 #content {
-  display: inherit;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #title {
@@ -24,8 +26,9 @@ a:hover {
 }
 
 #subtitle {
-  max-width: 68%;
-  display: inherit;
+  margin-left: auto;
+  margin-right: auto;
+  width: 68%;
   font-size: 1.2vw;
   padding-bottom: 40px;
 }
