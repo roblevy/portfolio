@@ -2,6 +2,7 @@ Portfolio spec:
 =========
 
 Each item has
+
 1. Title
 2. Image
 3. Description
