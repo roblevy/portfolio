@@ -23,6 +23,7 @@ a:hover {
 #title {
   font-size: 5.9vw;
   padding-bottom: 8px;
+  padding-top: 90px;
 }
 
 #subtitle {
@@ -50,9 +51,15 @@ a:hover {
   -webkit-transition: opacity 0.2s;
 }
 
-.active .portfolio-image {
+.hover {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/*.hover_effect {
   opacity: 0.1;
 }
+*/
 
 .portfolio-title {
   padding-bottom: 10px;
@@ -73,5 +80,17 @@ a:hover {
 }
 
 .active .portfolio-description {
+  opacity: 1;
+}
+
+.active .portfolio-image {
+  opacity: 0.1;
+}
+
+.touched .portfolio-image {
+  visibility: hidden;
+}
+
+.touched .portfolio-description {
   opacity: 1;
 }

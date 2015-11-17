@@ -5,6 +5,8 @@
   // Parameters
   portfolio._min_width_px = 200;
   portfolio._max_squares_per_row = 3;
+  portfolio.isTouchDevice = 'ontouchstart' in document.documentElement;
+
   // Functions
   portfolio.layout = function(n) {
     var col = function(i, n) {
@@ -27,6 +29,7 @@
       return objs;
     };
   };
+
   portfolio.render = function(csv_file, selection) {
     // Render the contents of csv_file to the D3 selection
     var xy_sort = function(a, b) {
@@ -63,16 +66,12 @@
           .append('td');
       }
       var cells = d3.selectAll('td').data(objs);
-      var cell_divs = cells.append('a')
-          .attr('href', function(d) { return d.link; })
-          .attr('target', '_blank')
+      var cell_divs = cells
         .append('div')
           .style("width", function(d) { return d.width + "px"; })
           .style("height", function(d) { return d.width + "px"; })
           .style("background-color", random_colour)
           .attr('class', 'portfolio-item')
-          .on('mouseover', function(d) { this.classList.add('active'); })
-          .on('mouseout', function(d) { this.classList.remove('active'); })
       ;
 
       cell_divs.append('div')
@@ -88,16 +87,39 @@
       cells.append('div')
         .attr('class', 'portfolio-title')
         .text(function(d) { return d.title; });
+
+      portfolio.add_interaction();
     });
+  };
+
+  portfolio.add_interaction = function() {
+      // TODO: This stuff STILL doesn't work.
+      // I can't get an <a> element to only be clicked when
+      // there's something on top of it. Might need to append
+      // the <a> only when mouseover and remove it when mouseout
+    var items = d3.selectAll('.portfolio-item');
+    if (portfolio.isTouchDevice) {
+        // Mobile interaction
+        items
+            .on('mouseover', function(d) { this.classList.add('touched'); })
+            .on('mouseout', function(d) { this.classList.remove('touched'); });
+        items = items.select('.portfolio-description');
+    } else {
+        // Desktop interaction
+        // This adds a "wrapper" anchor element
+        // to each .portfolio-item
+        items
+            .on('mouseover', function(d) { console.log('mouseover!'); this.classList.add('active'); })
+            .on('mouseout', function(d) { this.classList.remove('active'); })
+    }
+    items.each( function() {
+        d3.select(this.parentNode).append('a') 
+        .attr('href', function(d) { return d.link; })
+        .attr('target', '_blank')
+        .node().appendChild(this) });
   };
 
   this.portfolio = portfolio;
 }();
 
 portfolio.render('portfolio.csv', d3.select('#content'));
-// TODO: It'd be nice to make the loading of images asynchronous
-// using Queue.js. The idea would be something like:
-// queue()
-//   .defer(put_image_onto_div, "filename.png")
-//   .await(ready)
-// but really you'd want to do it in a data-driven way.
